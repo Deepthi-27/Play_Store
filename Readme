@@ -1,0 +1,13 @@
+# Play Store Project
+
+This is a Python-based Play Store analytics dashboard project.
+
+## Features
+- Dashboard visualization
+- Email reader integration
+- Data analysis
+
+## Requirements
+Install dependencies using:
+
+pip install -r requirements.txt
