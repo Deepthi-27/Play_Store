@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Store Real-Time Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Filters</h2>
+            </div>
+            
+            <div class="filter-group">
+                <label>Select Category</label>
+                <div class="checkbox-container" id="category-container">
+                    <!-- Checkboxes injected by JS or Loop -->
+                    {% for cat in categories %}
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cat_{{ loop.index }}" name="category" value="{{ cat }}">
+                        <label for="cat_{{ loop.index }}">{{ cat }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Minimum Rating: <span id="rating-val">3.5</span></label>
+                <input type="range" id="rating-slider" min="0" max="5" step="0.1" value="3.5">
+            </div>
+
+            <div class="filter-group">
+                <label>Minimum Installs: <span id="installs-val">10000</span></label>
+                <input type="range" id="installs-slider" min="0" max="{{ max_installs }}" step="10000" value="10000">
+            </div>
+            
+            <div class="sidebar-footer">
+                <p>Play Store Analytics</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Play Store Real-Time Analytics Dashboard</h1>
+                <p>Free real-world dataset | Near real-time analytics</p>
+                <p class="last-updated" id="last-updated">Last updated: Loading...</p>
+            </header>
+
+            <!-- METRICS ROW -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Total Apps</h3>
+                    <p id="metric-total-apps">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Total Installs</h3>
+                    <p id="metric-total-installs">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Avg Rating</h3>
+                    <p id="metric-avg-rating">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Total Reviews</h3>
+                    <p id="metric-total-reviews">Loading...</p>
+                </div>
+            </div>
+
+            <!-- CHARTS GRID -->
+            <div class="charts-grid">
+                <div class="chart-card" id="chart1"></div>
+                <div class="chart-card" id="chart2"></div>
+                <div class="chart-card wide" id="chart3"></div> <!-- Map is usually better wide -->
+                <div class="chart-card wide" id="chart4"></div>
+                <div class="chart-card" id="chart5"></div>
+                <div class="chart-card" id="chart6"></div>
+            </div>
+            
+            <div class="dataset-preview">
+                 <!-- Could add table here if needed -->
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
